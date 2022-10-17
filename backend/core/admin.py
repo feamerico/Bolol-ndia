@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Cupcake
+from .models import ItemPadr
 # Register your models here.
 
 
-@admin.register(Cupcake)
-class CupcakeModel(admin.ModelAdmin):
-    list_filter = ('title', 'description', 'price')
-    list_display = ('title', 'description', 'price')
+@admin.register(ItemPadr)
+class ItemPadrModel(admin.ModelAdmin):
+    list_filter = ('title', 'description', 'price', 'inventory')
+    list_display = ('title', 'description', 'price', 'inventory')

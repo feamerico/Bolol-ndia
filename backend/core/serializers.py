@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from .models import Cupcake
+from .models import ItemPadr
 from django.contrib.auth.models import User
 from rest_framework.authtoken.views import Token
 
 
-class CupcakeSerializer(serializers.ModelSerializer):
+class ItemPadrSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cupcake
-        fields = ['id', 'title', 'description', 'price']
+        model = ItemPadr
+        fields = ['id', 'title', 'description', 'price', 'inventory']
 
 
 class UserSerializer(serializers.ModelSerializer):
