@@ -1,0 +1,30 @@
+{% extends 'loja/layout/base.html' %}
+
+{% block title %}Pedidos - {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Pedidos</li>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Pedido</th>
+        <th>Criado em</th>
+        <th>Quantidade de itens</th>
+        <th>Valor Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pedido in pedidos %}
+        <tr>
+          <td>{{ pedido.id }}</td>
+          <td>{{ pedido.created_at }}</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

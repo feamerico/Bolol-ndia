@@ -1,0 +1,12 @@
+{% extends 'loja/layout/base.html' %}
+
+{% block title %}Pedidos - {{ pedidos.id }} - {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Pedidos</a></li>
+  <li class="breadcrumb-item active">{{ pedidos.id }}</li>
+{% endblock %}
+
+{%block content%}
+
+{%endblock%}

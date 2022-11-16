@@ -6,3 +6,27 @@
 .navbar {
   background-color: rgb(134, 177, 255);
 }
+
+#divslider1 {
+  height: 400px;
+  width: 100%;
+  background-image: url("../img/slider-1.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+#divslider2 {
+  height: 400px;
+  width: 100%;
+  background-image: url("../img/slider-2.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+#divslider3 {
+  height: 400px;
+  width: 100%;
+  background-image: url("../img/slider-3.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+}

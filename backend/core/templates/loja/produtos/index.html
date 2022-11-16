@@ -1,0 +1,41 @@
+{% extends 'loja/layout/base.html' %}
+
+
+{% block content %}
+ 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'categorias' %}">Categoria</a></li>
+        <li class="breadcrumb-item active">{{ categoria_nome.nome }}</li>
+    </ol>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ categoria_nome.nome }}</h1>
+            <hr>
+            <div class="row">
+                {% for produto in produtos %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <a href="{% url 'produto' produto.Categoria.slug produto.slug %}"> 
+                                <div class="card-body">
+                                    <div class="categoria-img">
+                                        <img src="{{ produto.produto_imagem.url }}" alt="produto-img" class="w-100" style="height: 200px;" />
+                                    </div>
+                                    <h4 class="text-center">{{ produto.nome }}</h4>
+                                    <span> R${{ produto.valorvenda | floatformat:2 }}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
