@@ -1,0 +1,110 @@
+{% extends 'loja/layout/base.html' %}
+
+
+{% block content %}
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'carrinho' %}">Carrinho</a></li>
+            <li class="breadcrumb-item">Checkout</li>
+        </ol>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card shadow checkoutform">
+                    <div class="card-body">
+                        <h6>Detalhes básicos</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Nome</label>
+                                <input type="text" class="form-control" placeholder="Digite seu nome">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Sobrenome</label>
+                                <input type="text" class="form-control" placeholder="Digite seu sobrenome">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label>Email</label>
+                                <input type="email" class="form-control" placeholder="Digite seu e-mail">
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label>Telefone/Celular</label>
+                                <input type="text" class="form-control" placeholder="Digite seu telefone/celular">
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                {% comment %} <label>Loja</label> {% endcomment %}
+                                <select class="form-select" style="width:auto;">
+                                    
+                                    {% if loja %}
+                                        {% for loja in lojas %}
+                                            <option value="{{ loja }}">{{ loja }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        <option value="indisponiveis">Não há lojas disponíveis</option>
+                                    {% endif %}
+                                        
+                                    
+                                </select>
+                            </div>
+                            {% comment %}
+                            <div class="col-md-6 mt-2">
+                                <label>PIN Code</label>
+                                <input type="text" class="form-control" placeholder="Digite o PIN Code">
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h6>Resumo do Pedido</h6>
+                        <hr>
+                        
+                        {% if cartitems %}
+                            <table class="table table-stripeds table-bordereds">
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Qtd</th>
+                                        <th>Valor unit. (R$)</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    {% for item in cartitems %}
+                                        <tr>
+                                            <td>
+                                                <img src="{{ item.produto.produto_imagem.url }}" class="me-2" height="50px" lenght="50px" alt="Imagem do produto"> {{ item.produto.nome }}
+                                            </td>
+                                            <td>{{ item.produto_qtd }}</td>
+                                            <td>{{ item.produto.valorvenda | floatformat:2 }}</td>
+
+                                        </tr>
+                                        
+                                    {% endfor %}
+                                        
+                                </tbody>
+                            </table>
+                            <h6 class="text-right">Total
+                                <span>R$ {{ total_price | floatformat:2 }}</span>
+                            </h6>
+                            <div class="mt-3">
+                                <a href="#" class="btn btn-success w-100">Emitir Pedido</a>  
+                            </div>
+                            
+                        {% else %}
+                            <h4>Seu carrinho está vazio</h4>
+                        {% endif %}
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

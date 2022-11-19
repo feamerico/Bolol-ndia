@@ -30,3 +30,17 @@
   background-repeat: repeat;
   background-size: contain;
 }
+
+.alert {
+  margin-bottom: 0px;
+}
+
+.checkoutform label {
+  font-size: 14px !important;
+  font-weight: 500;
+}
+
+.checkoutform input,
+textarea {
+  font-size: 14px !important;
+}

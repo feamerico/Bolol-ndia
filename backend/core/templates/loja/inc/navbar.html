@@ -9,23 +9,41 @@
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item {% if request.resolver_match.url_name == 'pedidos' %}active{% endif %}">
                 <a class="nav-link" href="#">Pedidos<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {% if request.resolver_match.url_name == 'categorias' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'categorias' %}">Produtos</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item  {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
                 <a class="nav-link" href="#">Sobre</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item  {% if request.resolver_match.url_name == 'carrinho' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'carrinho' %}">
                     <img src="{% static '/img/cart.png' %}" width="40" height="40" class="d-inline-block align-top" alt="">
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login/User</a>
-            </li>            
+            
+            {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown {% if request.resolver_match.url_name == 'perfil' %}active{% endif %}">
+                    <a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ request.user }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </li>       
+            {% else %}
+                <li class="nav-item  {% if request.resolver_match.url_name == 'loginpage' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'loginpage' %}">Login</a>
+                </li>            
+                <li class="nav-item  {% if request.resolver_match.url_name == 'registro' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'registro' %}">Registrar</a>
+                </li>       
+            {% endif %}
         </ul>
     </div>
 </nav>    

@@ -1,0 +1,72 @@
+{% extends 'loja/layout/base.html' %}
+
+
+{% block content %}
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+            <li class="breadcrumb-item">Carrinho</li>
+        </ol>
+    </nav>
+
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card shadow">
+                        <div class="card-body cart-data">
+                            {% if carrinho  %}
+                                {% for item in carrinho %}
+                                    <div class="row product-data">
+                                        <div class="col-md-2 my-auto">
+                                            <img src="{{ item.produto.produto_imagem.url}}" height="70px" width="70px" alt="Imagem aqui">
+                                        </div>
+                                        <div class="col-md-3 my-auto">
+                                            <h6>{{ item.produto.nome }}</h6>
+                                        </div>
+                                        <div class="col-md-2 my-auto">
+                                            <h6>R${{ item.produto.valorvenda | floatformat:2 }}</h6>
+                                        </div>
+                                        <div class="col-md-3 my-auto">
+                                            <input type="hidden" class="prod_id" value="{{ item.produto_id }}">
+                                            {% csrf_token %}
+                                            
+                                            {% if item.produto.quantidade >= item.produto_qtd %}
+                                                <label for="Quantidade">Quantidade</label>
+                                                <div class="input-group text-center mb-3" style="width: 130px;">
+                                                    <button class="input-group-text changeQuantity decrement-btn">-</button>
+                                                    <input type="text" name="quantidade" class="form-control qty-input text-center" value="{{ item.produto_qtd }}">
+                                                    <button class="input-group-text changeQuantity increment-btn">+</button>
+                                                </div>
+                                            {% else %}
+                                                {% if item.produto.quantidade == 0 %}
+                                                    <h6>Indisponível</h6>    
+                                                {% elif item.produto.quantidade == 1 %}
+                                                    <h6>Apenas 1 unidade disponível</h6>    
+                                                {% else %}
+                                                    <h6>Apenas {{ item.produto.quantidade }} unidades disponíveis</h6>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-2 my-auto">
+                                            <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remover</button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <a href="{% url 'checkout' %}" class="btn btn-outline-success d-md-flex justify-content-md-center">Checkout</a>
+                            {% else %}
+                                <h4>Seu carrinho está vazio</h4>
+                            {% endif %}
+                                
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+{% endblock %}

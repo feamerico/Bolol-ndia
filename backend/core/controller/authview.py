@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
-from django.shortcuts import redirect, render, get_object_or_404
+from django.http.response import JsonResponse
+from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from core.forms import CustomUserForm
 
 
@@ -19,18 +19,30 @@ def registro(request):
 
 
 def loginpage(request):
-    if request.method == 'POST':
-        name = request.POST.get('username')
-        passwd = request.POST.get('password')
+    if request.user.is_authenticated:
+        messages.warning(request, "Você já está logado!")
+        return redirect('home')
+    else:
 
-        user = authenticate(request, username=name, password=passwd)
+        if request.method == 'POST':
+            name = request.POST.get('username')
+            passwd = request.POST.get('password')
 
-        if user is not None:
-            login(request, user)
-            messages.success(request, 'Logado com sucesso!')
-            return redirect('')
-        else:
-            messages.error(request, 'Usuário ou senha inválidos')
-            return redirect('loginpage')
+            user = authenticate(request, username=name, password=passwd)
 
-    return render(request, 'loja/auth/login.html')
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Logado com sucesso!')
+                return redirect('home')
+            else:
+                messages.error(request, 'Usuário ou senha inválidos')
+                return redirect('loginpage')
+
+        return render(request, 'loja/auth/login.html')
+
+
+def logoutpage(request):
+    if request.user.is_authenticated:
+        logout(request)
+        messages.success(request, 'Deslogado com sucesso!')
+    return redirect('home')

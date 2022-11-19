@@ -37,3 +37,28 @@ class Produto(models.Model):
 
     def __str__(self):
         return str(self.nome)
+
+
+class Carrinho(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    produto_qtd = models.IntegerField(null=False, blank=False)
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)  # type: ignore
+
+
+class Loja(models.Model):
+    endereco = models.CharField(max_length=150, null=False, blank=False)
+    cidade = models.CharField(max_length=150, null=False, blank=False)
+    estado = models.CharField(max_length=150, null=False, blank=False)
+    fechado = models.BooleanField()
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.endereco + " - " + self.cidade + "/" + self.estado)
+
+# class Pedido(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     nome = models.CharField()
