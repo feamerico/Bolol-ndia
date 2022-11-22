@@ -5,4 +5,37 @@
 
   {% include 'loja/inc/slider.html' %}
   
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Produtos mais vendidos</h3>
+        <hr>
+        <div class="row">
+          {% for produto in produtos_mais_vendidos %}
+            <div class="col-md-3">
+              <div class="card">
+                  <a href="{% url 'produto' produto.produto.Categoria.slug produto.produto.slug %}"> 
+                  <div class="card-body">
+                    <div class="categoria-img">
+                      <img src="{{ produto.produto.produto_imagem }}" alt="produto-img" class="w-100" style="height: 200px;" />
+                    </div>
+                    <h4 class="text-center">{{ produto.produto.nome }}</h4>
+                    <span class="float-left">R${{ produto.produto.valorvenda | floatformat:2 }}</span>
+                    <span class="float-right mb-2">
+                      {% if produto.produto.quantidade > 0 %}
+                        <button type="button" class="btn btn-primary btn-sm me-3 float-start addToCartBtn">Add Carrinho <i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
+                      {% else %}
+                        <button type="button" class="btn btn-danger btn-sm me-3 float-start">Indisponível <i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
+                      {% endif %}
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

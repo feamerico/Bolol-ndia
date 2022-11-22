@@ -19,6 +19,9 @@
     {% comment %} Custom CSS {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
 
+    {% comment %} JQuery UI Stylesheet {% endcomment %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
     {% comment %} Alertify JS - CSS {% endcomment %}
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     {% comment %} Alertify JS - Default theme {% endcomment %}
@@ -56,6 +59,29 @@
 
     {% comment %} Bootstrap Script {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    {% comment %} JQuery UI Script {% endcomment %}
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <script>
+      var availableTags = [];
+
+      $.ajax({
+        method: "GET",
+        url: "/lista-produtos",
+        success: function (response) {
+          startAutoComplete(response);
+        }
+      });
+
+      function startAutoComplete(availableTags)
+      {
+        $( "#searchproduct" ).autocomplete({
+          source: availableTags
+        });
+      }
+    
+    </script>
     
     {% comment %} Alertify JS {% endcomment %}
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

@@ -20,7 +20,7 @@ class Categoria(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.nome)
+        return str(self.slug)
 
 
 class Produto(models.Model):
@@ -36,7 +36,7 @@ class Produto(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.nome)
+        return str(self.nome)  # type: ignore
 
 
 class Carrinho(models.Model):
@@ -57,8 +57,47 @@ class Loja(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.endereco + " - " + self.cidade + "/" + self.estado)
+        return '{}'.format(self.endereco)
 
-# class Pedido(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     nome = models.CharField()
+
+class Pedido(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    loja = models.ForeignKey(Loja, on_delete=models.CASCADE)
+    nome = models.CharField(max_length=150, null=False, blank=False)
+    sobrenome = models.CharField(max_length=150, null=False, blank=False)
+    email = models.CharField(max_length=150, null=False, blank=False)
+    telefone = models.CharField(max_length=150, null=False, blank=False)
+    total_price = models.FloatField(null=False)
+    forma_pagamento = models.CharField(max_length=150, null=False, blank=False)
+    statuspedido = (
+        ('Pendente', 'Pendente'),
+        ('Em entrega', 'Em entrega'),
+        ('Concluído', 'Concluído'),
+    )
+    status = models.CharField(
+        max_length=150, choices=statuspedido, default='Pendente')
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{}'.format(self.id)  # type: ignore
+
+
+class PedidoItem(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    valor = models.FloatField(null=False)
+    quantidade = models.IntegerField(null=False)
+
+    def __str__(self):
+        return '{}'.format(self.pedido.id)  # type: ignore
+
+
+class Perfil(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    telefone = models.CharField(max_length=50, null=False)
+    loja = models.ForeignKey(Loja, on_delete=models.CASCADE)
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username

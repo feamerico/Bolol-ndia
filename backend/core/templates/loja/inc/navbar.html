@@ -5,18 +5,31 @@
             <img src="{% static '/img/logo-bololandia.png' %}" width="45" height="45" class="d-inline-block align-top" alt="">
             Bololândia
         </a>
+
+        <div class="search-bar">
+            <form action="{% url 'procurarproduto' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="search" required class="form-control" name="productsearch" id="searchproduct" placeholder="Pesquisar produtos">
+                    <div class="input-group-prepend">
+                        <button type="submit" class="input-group-text"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+
     </div>
     
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% if request.resolver_match.url_name == 'pedidos' %}active{% endif %}">
-                <a class="nav-link" href="#">Pedidos<span class="sr-only">(current)</span></a>
+            <li class="nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'home' %}">Início</a>
             </li>
             <li class="nav-item {% if request.resolver_match.url_name == 'categorias' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'categorias' %}">Produtos</a>
-            </li>
-            <li class="nav-item  {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-                <a class="nav-link" href="#">Sobre</a>
             </li>
             <li class="nav-item  {% if request.resolver_match.url_name == 'carrinho' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'carrinho' %}">
@@ -30,8 +43,7 @@
                         {{ request.user }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="{% url 'meuspedidos' %}">Meus Pedidos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>

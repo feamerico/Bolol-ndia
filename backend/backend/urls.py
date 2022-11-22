@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from core import views
 
-from core.controller import authview, carrinho, checkout
+from core.controller import authview, carrinho, checkout, pedido
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,7 +24,11 @@ urlpatterns = [
     path('deletaritemcarrinho', carrinho.deletaritemcarrinho,
          name='deletaritemcarrinho'),
     path('checkout/', checkout.index, name='checkout'),
-    path('pedidos/novo/', views.pedidonovo, name='pedidonovo')
+    path('emitirpedido', checkout.emitirpedido, name='emitirpedido'),
+    path('meuspedidos/', pedido.index, name='meuspedidos'),
+    path('pedido/<str:id>', pedido.verpedido, name='verpedido'),
+    path('lista-produtos', views.listaprodutosAjax),
+    path('procurarproduto', views.procurarproduto, name='procurarproduto')
 ]
 
 if settings.DEBUG:

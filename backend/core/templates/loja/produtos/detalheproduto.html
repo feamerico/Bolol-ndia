@@ -46,9 +46,7 @@
                                                 <input type="hidden" value="{{ produto.id }}" class="prod_id">
                                                 <label for="Quantidade">Quantidade</label>
                                                 <div class="input-group text-center mb-3" style="width=130px;">
-                                                    <button class="input-group-text decrement-btn">-</button>
-                                                    <input type="text" name="quantidade" class="form-control qty-input text-center" value="1">
-                                                    <button class="input-group-text increment-btn">+</button>
+                                                    <input type="number" name="quantidade" class="form-control qty-input text-center" min="1" max="{{ produto.quantidade }}" value="1">
                                                 </div>
                                             </div>
                                             <div class="col-md-9">

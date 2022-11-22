@@ -7,6 +7,10 @@
   background-color: rgb(134, 177, 255);
 }
 
+a {
+  color: #000;
+}
+
 #divslider1 {
   height: 400px;
   width: 100%;
@@ -43,4 +47,8 @@
 .checkoutform input,
 textarea {
   font-size: 14px !important;
+}
+
+.search-bar {
+  width: 20rem !important;
 }

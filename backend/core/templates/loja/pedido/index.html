@@ -1,0 +1,53 @@
+{% extends 'loja/layout/base.html' %}
+
+
+{% block content %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+            <li class="breadcrumb-item">Meus Pedidos</li>
+        </ol>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h3 class="mb-0">Meus Pedidos</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>ID</th>
+                                    <th>Valor Total</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pedido in pedidos reversed %}
+                                    <tr>
+                                        <td>{{ pedido.criado_em | date:"d/m/y h:m" }}</td>
+                                        <td>{{ pedido.id }}</td>
+                                        <td>{{ pedido.total_price | floatformat:2 }}</td>
+                                        <td>{{ pedido.status }}</td>
+                                        <td>
+                                            <a href="{% url 'verpedido' pedido.id %}" class="btn btn-primary">Ver</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

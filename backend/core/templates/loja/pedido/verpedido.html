@@ -1,0 +1,84 @@
+{% extends 'loja/layout/base.html' %}
+
+
+{% block content %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'meuspedidos' %}">Meus Pedidos</a></li>
+            <li class="breadcrumb-item">{{ pedido.id }}</li>
+        </ol>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="mb-0">Pedido {{ pedido.id }}</h3>
+                            </div>
+                            <div class="col col-md-auto">
+                                <a href="{% url 'meuspedidos' %}" class="btn btn-warning text-white"><i class="fa fa-reply"></i> Voltar </a>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Detalhes do solicitante</h4>
+                                <hr>
+                                <label class="mt-2">Nome</label>
+                                <div class="border p-1">{{ pedido.nome }}</div>
+                                <label class="mt-2">Sobrenome</label>
+                                <div class="border p-1">{{ pedido.sobrenome }}</div>
+                                <label class="mt-2">E-mail</label>
+                                <div class="border p-1">{{ pedido.email }}</div>
+                                <label class="mt-2">Telefone/Celular</label>
+                                <div class="border p-1">{{ pedido.telefone }}</div>
+                                <label class="mt-2">Loja</label>
+                                <div class="border p-1">{{ pedido.loja.endereco }} - {{ pedido.loja.cidade }}/{{ pedido.loja.estado }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Detalhes do pedido</h4>
+                                <hr>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Qtd</th>
+                                            <th>Valor Unit.</th>
+                                            <th>Imagem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in itenspedido %}
+                                            <tr>
+                                                <td>{{ item.produto.nome }}</td>
+                                                <td>{{ item.quantidade }}</td>
+                                                <td>{{ item.valor | floatformat:2 }}</td>
+                                                <td>
+                                                    <img src="{{ item.produto.produto_imagem.url }}" height="50px" width="50px" alt="Imagem do Produto">
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <h4 class="text-right">Total: {{ pedido.total_price }}</h4>
+
+                                <h6 class="text-right">Forma de pagamento: {{ pedido.forma_pagamento }}</h6>
+                                <h6 class="text-right">Status do pedido: {{ pedido.status }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
