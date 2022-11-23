@@ -30,61 +30,62 @@ def index(request):
 @login_required(login_url='loginpage')  # type: ignore
 def emitirpedido(request):
     if request.method == "POST":
+        if Carrinho.objects.filter(user=request.user):
+            currentuser = User.objects.filter(id=request.user.id).first()
 
-        currentuser = User.objects.filter(id=request.user.id).first()
+            if not currentuser.first_name or not currentuser.last_name or not currentuser.email:
+                currentuser.first_name = request.POST.get('nome')
+                currentuser.last_name = request.POST.get('sobrenome')
+                currentuser.email = request.POST.get('email')
+                currentuser.save()
 
-        if not currentuser.first_name or not currentuser.last_name or not currentuser.email:
-            currentuser.first_name = request.POST.get('nome')
-            currentuser.last_name = request.POST.get('sobrenome')
-            currentuser.email = request.POST.get('email')
-            currentuser.save()
+            if not Perfil.objects.filter(user_id=request.user.id):
+                userprofile = Perfil()
+                userprofile.user = request.user
+                userprofile.telefone = request.POST.get('telefone')
+                userprofile.loja = Loja.objects.filter(  # type: ignore
+                    endereco=request.POST.get('loja')).first()
+                userprofile.save()
 
-        if not Perfil.objects.filter(user_id=request.user.id):
-            userprofile = Perfil()
-            userprofile.user = request.user
-            userprofile.telefone = request.POST.get('telefone')
-            userprofile.loja = Loja.objects.filter(  # type: ignore
+            novopedido = Pedido()
+            novopedido.user = request.user
+            novopedido.nome = request.POST.get('nome')
+            novopedido.sobrenome = request.POST.get('sobrenome')
+            novopedido.email = request.POST.get('email')
+            novopedido.telefone = request.POST.get('telefone')
+            novopedido.loja = Loja.objects.filter(  # type: ignore
                 endereco=request.POST.get('loja')).first()
-            userprofile.save()
 
-        novopedido = Pedido()
-        novopedido.user = request.user
-        novopedido.nome = request.POST.get('nome')
-        novopedido.sobrenome = request.POST.get('sobrenome')
-        novopedido.email = request.POST.get('email')
-        novopedido.telefone = request.POST.get('telefone')
-        novopedido.loja = Loja.objects.filter(  # type: ignore
-            endereco=request.POST.get('loja')).first()
+            novopedido.forma_pagamento = request.POST.get('forma_pagamento')
 
-        novopedido.forma_pagamento = request.POST.get('forma_pagamento')
+            carrinho = Carrinho.objects.filter(user=request.user)
+            carrinho_total_price = 0
+            for item in carrinho:
+                carrinho_total_price = carrinho_total_price + \
+                    item.produto.valorvenda * item.produto_qtd  # type: ignore
 
-        carrinho = Carrinho.objects.filter(user=request.user)
-        carrinho_total_price = 0
-        for item in carrinho:
-            carrinho_total_price = carrinho_total_price + \
-                item.produto.valorvenda * item.produto_qtd  # type: ignore
+            novopedido.total_price = carrinho_total_price
 
-        novopedido.total_price = carrinho_total_price
+            novopedido.save()
 
-        novopedido.save()
+            novopedidoitens = Carrinho.objects.filter(user=request.user)
+            for item in novopedidoitens:
+                PedidoItem.objects.create(
+                    pedido=novopedido,
+                    produto=item.produto,
+                    valor=item.produto.valorvenda,
+                    quantidade=item.produto_qtd
+                )
 
-        novopedidoitens = Carrinho.objects.filter(user=request.user)
-        for item in novopedidoitens:
-            PedidoItem.objects.create(
-                pedido=novopedido,
-                produto=item.produto,
-                valor=item.produto.valorvenda,
-                quantidade=item.produto_qtd
-            )
+                # redução dos itens do estoque
+                produtopedido = Produto.objects.filter(
+                    id=item.produto.id).first()
+                produtopedido.quantidade = produtopedido.quantidade - item.produto_qtd
+                produtopedido.save()
 
-            # redução dos itens do estoque
-            produtopedido = Produto.objects.filter(id=item.produto.id).first()
-            produtopedido.quantidade = produtopedido.quantidade - item.produto_qtd
-            produtopedido.save()
-
-        # limpar carrinho do usuário
-        Carrinho.objects.filter(user=request.user).delete()
-        messages.success(request, "Pedido emitido com sucesso")
-        return redirect('meuspedidos')
+            # limpar carrinho do usuário
+            Carrinho.objects.filter(user=request.user).delete()
+            messages.success(request, "Pedido emitido com sucesso")
+            return redirect('meuspedidos')
 
     return redirect('home')

@@ -5,7 +5,7 @@ from .models import Categoria, Produto, PedidoItem
 
 
 def home(request):
-    produtos_mais_vendidos = PedidoItem.objects.raw('SELECT 1 as id, "core_pedidoitem"."produto_id", "core_categoria"."slug", "core_produto"."slug", "core_produto"."produto_imagem", "core_produto"."valorvenda", "core_produto"."nome", SUM("core_pedidoitem"."quantidade") AS "vendidos" FROM "core_pedidoitem" INNER JOIN "core_produto" ON ("core_pedidoitem"."produto_id" = "core_produto"."id") INNER JOIN "core_categoria" ON ("core_produto"."Categoria_id" = "core_categoria"."id") WHERE NOT ("core_categoria"."nome" = "Bebidas") GROUP BY "core_pedidoitem"."produto_id"')
+    produtos_mais_vendidos = PedidoItem.objects.raw('SELECT 1 as id, "core_pedidoitem"."produto_id", "core_categoria"."slug", "core_produto"."slug", "core_produto"."produto_imagem", "core_produto"."valorvenda", "core_produto"."nome", SUM("core_pedidoitem"."quantidade") AS "vendidos" FROM "core_pedidoitem" INNER JOIN "core_produto" ON ("core_pedidoitem"."produto_id" = "core_produto"."id") INNER JOIN "core_categoria" ON ("core_produto"."Categoria_id" = "core_categoria"."id") WHERE NOT ("core_categoria"."nome" = "Bebidas") GROUP BY "core_pedidoitem"."produto_id" ORDER BY "vendidos" DESC LIMIT 10')
     context = {'produtos_mais_vendidos': produtos_mais_vendidos}
     return render(request, 'loja/layout/index.html', context)
 

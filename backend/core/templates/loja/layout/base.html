@@ -19,6 +19,10 @@
     {% comment %} Custom CSS {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
 
+    {% comment %} Owl Carousel Stylesheet {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+
     {% comment %} JQuery UI Stylesheet {% endcomment %}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
@@ -33,6 +37,12 @@
       }
       
     </style>
+
+    {% comment %} favicon.ico {% endcomment %}
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
   </head>
   <body>
 
@@ -43,7 +53,7 @@
     
     {% endblock %}
     
-
+    {% include 'loja/inc/footer.html' %}
 
     {% comment %} FontAwesome {% endcomment %}
     <script src="https://kit.fontawesome.com/6ae00ec08a.js" crossorigin="anonymous"></script>
@@ -54,6 +64,9 @@
     {% comment %} Custom JS {% endcomment %}
     <script src="{% static 'js/custom.js' %}"></script>
 
+    {% comment %} Owl Carousel {% endcomment %}
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    
     {% comment %} Popper {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 

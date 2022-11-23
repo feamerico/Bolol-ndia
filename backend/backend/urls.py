@@ -23,10 +23,13 @@ urlpatterns = [
     path('updatecarrinho', carrinho.updatecarrinho, name='updatecarrinho'),
     path('deletaritemcarrinho', carrinho.deletaritemcarrinho,
          name='deletaritemcarrinho'),
+
     path('checkout/', checkout.index, name='checkout'),
     path('emitirpedido', checkout.emitirpedido, name='emitirpedido'),
+
     path('meuspedidos/', pedido.index, name='meuspedidos'),
     path('pedido/<str:id>', pedido.verpedido, name='verpedido'),
+
     path('lista-produtos', views.listaprodutosAjax),
     path('procurarproduto', views.procurarproduto, name='procurarproduto')
 ]

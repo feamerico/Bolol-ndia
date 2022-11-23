@@ -5,7 +5,7 @@ $(document).ready(function () {
     var produto_id = $(this).closest(".product-data").find(".prod_id").val();
     var produto_qtd = $(this).closest(".product-data").find(".qty-input").val();
     var token = $("input[name=csrfmiddlewaretoken]").val();
-
+    
     $.ajax({
       method: "POST",
       url: "/addcarrinho",

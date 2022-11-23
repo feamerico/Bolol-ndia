@@ -10,26 +10,38 @@
       <div class="col-md-12">
         <h3>Produtos mais vendidos</h3>
         <hr>
-        <div class="row">
+        <div class="row owl-carousel owl-theme">
           {% for produto in produtos_mais_vendidos %}
-            <div class="col-md-3">
+            <div class="product-data item">
               <div class="card">
+                <div class="card-body">
                   <a href="{% url 'produto' produto.produto.Categoria.slug produto.produto.slug %}"> 
-                  <div class="card-body">
                     <div class="categoria-img">
                       <img src="{{ produto.produto.produto_imagem }}" alt="produto-img" class="w-100" style="height: 200px;" />
                     </div>
                     <h4 class="text-center">{{ produto.produto.nome }}</h4>
-                    <span class="float-left">R${{ produto.produto.valorvenda | floatformat:2 }}</span>
-                    <span class="float-right mb-2">
-                      {% if produto.produto.quantidade > 0 %}
-                        <button type="button" class="btn btn-primary btn-sm me-3 float-start addToCartBtn">Add Carrinho <i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
-                      {% else %}
-                        <button type="button" class="btn btn-danger btn-sm me-3 float-start">Indisponível <i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
-                      {% endif %}
-                    </span>
+                  </a>
+                  <span class="float-left">R${{ produto.produto.valorvenda | floatformat:2 }}</span>
+                  <br>
+                  <div class="row mt-2">
+                    <div class="col-md-6">
+                      {% csrf_token %}
+                      <input type="hidden" value="{{ produto.produto.id }}" class="prod_id">
+                      <div class="input-group text-center mb-3">
+                        <input type="number" name="quantidade" class="form-control qty-input text-center" min="1" max="{{ produto.produto.quantidade }}" value="1">
+                      </div>
+                    </div>
+                    <div class="col-md-6 px-0">
+                      <span class="mb-2">
+                        {% if produto.produto.quantidade > 0 %}
+                          <button type="button" class="btn btn-primary btn-sm py-2 me-3 addToCartBtn">Add Carrinho <i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
+                        {% else %}
+                          <button type="button" class="btn btn-danger btn-sm me-3 py-2 disabled">Indisponível</button>
+                        {% endif %}
+                      </span>
+                    </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           {% endfor %}
@@ -39,3 +51,28 @@
   </div>
 
 {% endblock %}
+
+
+{% block scripts %}
+
+<script>
+  $('.owl-carousel').owlCarousel({
+    loop:false,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+})</script>
+  
+{% endblock scripts %}
+
+  

@@ -68,7 +68,7 @@
                                         {% endfor %}
                                     </tbody>
                                 </table>
-                                <h4 class="text-right">Total: {{ pedido.total_price }}</h4>
+                                <h4 class="text-right">Total: {{ pedido.total_price | floatformat:2 }}</h4>
 
                                 <h6 class="text-right">Forma de pagamento: {{ pedido.forma_pagamento }}</h6>
                                 <h6 class="text-right">Status do pedido: {{ pedido.status }}</h6>

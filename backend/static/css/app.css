@@ -52,3 +52,7 @@ textarea {
 .search-bar {
   width: 20rem !important;
 }
+
+.btn {
+  white-space: normal;
+}
