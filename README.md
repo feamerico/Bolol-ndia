@@ -46,22 +46,6 @@ Para rodar os testes, rode o seguinte comando
   python manage.py test
 ```
 
-## Instalação
-
-Instale my-project com npm
-
-```bash
-  npm install my-project
-  cd my-project
-```
-
-## Deploy
-
-Para fazer o deploy desse projeto rode
-
-```bash
-  npm run deploy
-```
 
 ## Roadmap
 
