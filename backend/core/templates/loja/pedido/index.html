@@ -6,7 +6,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
-            <li class="breadcrumb-item">Meus Pedidos</li>
+            <li class="breadcrumb-item">{% if request.user.is_superuser %}Todos os pedidos{% else %}Meus pedidos{% endif %}</li>
         </ol>
     </nav>
 
@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-header">
-                        <h3 class="mb-0">Meus Pedidos</h3>
+                        <h3 class="mb-0">{% if request.user.is_superuser %}Todos os pedidos{% else %}Meus pedidos{% endif %}</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -25,6 +25,7 @@
                                     <th>ID</th>
                                     <th>Valor Total</th>
                                     <th>Status</th>
+                                    {% if request.user.is_superuser %}<th>Solicitante</th>{% endif %}
                                     <th>Ação</th>
                                 </tr>
                             </thead>
@@ -35,6 +36,7 @@
                                         <td>{{ pedido.id }}</td>
                                         <td>{{ pedido.total_price | floatformat:2 }}</td>
                                         <td>{{ pedido.status }}</td>
+                                        {% if request.user.is_superuser %}<td>{{pedido.user}}</td>{% endif %}
                                         <td>
                                             <a href="{% url 'verpedido' pedido.id %}" class="btn btn-primary">Ver</a>
                                         </td>
