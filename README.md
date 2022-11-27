@@ -46,6 +46,10 @@ Para rodar os testes, rode o seguinte comando
   python manage.py test
 ```
 
+## Deploy
+
+Link: https://bololandia.herokuapp.com/
+
 
 ## Roadmap
 
