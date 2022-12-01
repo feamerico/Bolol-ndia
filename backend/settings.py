@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'core',
-    'django_extensions'
+    'django_extensions',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -131,8 +133,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'uploads'),
+    os.path.join(BASE_DIR, 'static')
 ]
 
 THOUSAND_SEPARATOR = '.',
@@ -145,3 +146,10 @@ GRAPH_MODELS = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hneswlp2z',
+    'API_KEY': '673755151969477',
+    'API_SECRET': 'qZcuXSu_gXK-5oSTiXKFH8DZepk',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
