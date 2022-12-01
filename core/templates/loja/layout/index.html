@@ -17,7 +17,7 @@
                 <div class="card-body">
                   <a href="{% url 'produto' produto.produto.Categoria.slug produto.produto.slug %}"> 
                     <div class="categoria-img">
-                      <img src="{{ produto.produto.produto_imagem }}" alt="produto-img" class="w-100" style="height: 200px;" />
+                      <img src="{{ produto.produto.produto_imagem.url }}" alt="produto-img" class="w-100" style="height: 200px;" />
                     </div>
                     <h4 class="text-center">{{ produto.produto.nome }}</h4>
                   </a>
