@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-#_u@wxojecajtibc0w@=gi-0@)a411n5d70u0l1nt1@y^mlmgn
 
 # Use this when production to Heroku
 DEBUG = False
-ALLOWED_HOSTS = ['localhost', 'bololandia.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'bololandia.onrender.com']
 
 
 # Application definition
@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
+    # 'cloudinary_storage',
     'django.contrib.staticfiles',
     'core',
     'django_extensions',
-    'cloudinary',
+    # 'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -147,9 +147,11 @@ GRAPH_MODELS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hneswlp2z',
-    'API_KEY': '673755151969477',
-    'API_SECRET': 'qZcuXSu_gXK-5oSTiXKFH8DZepk',
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'hneswlp2z',
+#     'API_KEY': '673755151969477',
+#     'API_SECRET': 'qZcuXSu_gXK-5oSTiXKFH8DZepk',
+# }
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
