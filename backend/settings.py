@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#_u@wxojecajtibc0w@=gi-0@)a411n5d70u0l1nt1@y^mlmgn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # ALLOWED_HOSTS = []
 
 # Use this when production to Render
@@ -40,11 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # 'cloudinary_storage',
     'django.contrib.staticfiles',
     'core',
-    'django_extensions',
-    # 'cloudinary',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -147,11 +145,5 @@ GRAPH_MODELS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'hneswlp2z',
-#     'API_KEY': '673755151969477',
-#     'API_SECRET': 'qZcuXSu_gXK-5oSTiXKFH8DZepk',
-# }
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
