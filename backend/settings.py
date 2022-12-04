@@ -24,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#_u@wxojecajtibc0w@=gi-0@)a411n5d70u0l1nt1@y^mlmgn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # ALLOWED_HOSTS = []
 
-# Use this when production to Heroku
+# Use this when production to Render
 # DEBUG = False
 ALLOWED_HOSTS = ['localhost', 'bololandia.onrender.com']
 

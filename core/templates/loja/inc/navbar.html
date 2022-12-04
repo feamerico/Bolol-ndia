@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static '/img/logo-bololandia.png' %}" width="45" height="45" class="d-inline-block align-top" alt="">
+            <img src="{% static 'img/logo-bololandia.png' %}" width="45" height="45" class="d-inline-block align-top" alt="">
             Bololândia
         </a>
 
@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item  {% if request.resolver_match.url_name == 'carrinho' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'carrinho' %}">
-                    <img src="{% static '/img/cart.png' %}" width="40" height="40" class="d-inline-block align-top" alt="">
+                    <img src="{% static 'img/cart.png' %}" width="40" height="40" class="d-inline-block align-top" alt="">
                 </a>
             </li>
             
