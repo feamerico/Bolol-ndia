@@ -1,0 +1,58 @@
+.navbar-brand {
+  font-family: "Work Sans", cursive;
+  font-size: 35px;
+}
+
+.navbar {
+  background-color: rgb(134, 177, 255);
+}
+
+a {
+  color: #000;
+}
+
+#divslider1 {
+  height: 400px;
+  width: 100%;
+  background-image: url("../img/slider-1.f099a6de224c.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+#divslider2 {
+  height: 400px;
+  width: 100%;
+  background-image: url("../img/slider-2.54761e7eb41a.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+#divslider3 {
+  height: 400px;
+  width: 100%;
+  background-image: url("../img/slider-3.afa88fe459ac.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+}
+
+.alert {
+  margin-bottom: 0px;
+}
+
+.checkoutform label {
+  font-size: 14px !important;
+  font-weight: 500;
+}
+
+.checkoutform input,
+textarea {
+  font-size: 14px !important;
+}
+
+.search-bar {
+  width: 20rem !important;
+}
+
+.btn {
+  white-space: normal;
+}

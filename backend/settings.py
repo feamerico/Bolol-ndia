@@ -25,11 +25,11 @@ SECRET_KEY = 'django-insecure-#_u@wxojecajtibc0w@=gi-0@)a411n5d70u0l1nt1@y^mlmgn
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Use this when production to Render
-DEBUG = False
-ALLOWED_HOSTS = ['bololandia.onrender.com']
+DEBUG = True
+# ALLOWED_HOSTS = ['bololandia.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'django_extensions'
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +127,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -145,4 +145,5 @@ GRAPH_MODELS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

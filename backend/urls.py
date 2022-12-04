@@ -32,5 +32,8 @@ urlpatterns = [
 
     path('lista-produtos', views.listaprodutosAjax),
     path('procurarproduto', views.procurarproduto, name='procurarproduto')
-] + static(settings.MEDIA_URL,
-           document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
